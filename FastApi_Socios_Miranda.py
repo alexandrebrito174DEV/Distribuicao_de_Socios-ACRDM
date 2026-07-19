@@ -11,7 +11,9 @@ def start():
 
 @app.get("/sobre_esta_api")
 def sobre():
-   return {"mensagem acerca da api:": "Versão nº1/n Descrição: Inicio da api muito simples"}
+   return {"mensagem acerca da api:": "Versão nº1",
+           "Descrição": "Inicio da api muito simples"
+           }
 
 #cuidado com a indentação, isto não é C
 
@@ -31,7 +33,7 @@ def mostrar_geral():
 
     def informacao_mensagem():
         return {
-            "mensagem": "Informação de todos os sócios foi apresentada no ecrã"
+            "mensagem": "Informação de todos os sócios adicionados foi apresentada no ecrã"
         }
 
     return{
@@ -53,7 +55,7 @@ def mostrar_geral():
         "telefone": "+351 000000000"
             }
     ]
-    # --- fim de dicionário ---
+        # --- fim de dicionário ---
     }
 
 # "socios" é uma chave do dicionário.
@@ -66,7 +68,8 @@ def criar_socio():
         "id_socio": 1,
         "nome_socio": "Alexandre",
         "email": "alexandrebrito174@gmail.com",
-        "telefone": "+351 924023383"
+        "telefone": "+351 924023383",
+        "mensagem": "Foi criado um sócio"
     }
 @app.put("/socios/{id_socio}") #usar um caminho reutilizavel devo usar {id_socio}
 def atualizar_socios():
@@ -74,7 +77,8 @@ def atualizar_socios():
         "id_socio": 1, #o id deve ser sempre o mesmo - não se altera o id
         "nome_socio": "Alexandre Brito DEV",
         "email": "alexandrebrito@gmail.com",
-        "telefone": "+351 912345678"
+        "telefone": "+351 912345678",
+        "Informações atualizadas": "As informações (todas as infromações) acerca do Sócio {id_socio} foi atualizada"
     }
 
 @app.patch("/socios/{id_socio}")
@@ -84,7 +88,8 @@ def atualizar_dados(id_socio: int): #id_socio como parametro para tornar reutili
         "id_socio": id_socio, #reproveitar o id que vem da rota e da função (apresentado nos dois)
         "nome_socio": "Alexandre - O Grande DEV",
         "email": "alexandrebrito_dev@gmail.com",
-        "telefone": "+351 924000000"
+        "telefone": "+351 924000000",
+        "Informações atualizadas": "As informações acerca do Sócio {id_socio} foi atualizada"
     }
 
 
@@ -94,18 +99,43 @@ def atualizar_dados(id_socio: int): #id_socio como parametro para tornar reutili
 def admin():
     return {
         "id_admin": 1,
-        "nome_admin": "Alexandrina",
+        "nome_admin": "Alexandrina Cunha",
         "email": "qqqq@gmail.com",
         "telefone": "+351 111111111"
     }
-app.post("/admin")
+@app.post("/admin")
 def criar_admin():
     return {
         "id_admin": 1,
-        "nome_admin": "Alexandrina",
+        "nome_admin": "Alexandrina Cunha",
         "email": "qqqq@gmail.com",
         "telefone": "+351 111111111"
     }
-#----------------------------------------
+@app.patch("/admin")
+def atualizar_admin():
+    return {
+        "id_admin": 1,
+        "nome_admin": "Alexandrina Cunha",
+        "email": "cccc@gmail.com",
+        "telefone": "+351 111111000"
+    }
+#----------------------------------------------------------------
 
+#--- Parte de DEV ---
+@app.get("/admin_dev")
+def mostrar_dev():
+    {
+        "id_admin_dev": 1,
+        "nome_admin_dev": "Alexandre Brito",
+        "email": "alexandre_dev@acrdm.pt"
+    }
+
+@app.post("/admin_dev")
+def criar_dev():
+    {
+    "id_admin_dev": 1,
+    "nome_admin_dev": "Alexandre Brito",
+    "email": "alexandre_dev@acrdm.pt"
+    }
+#-----------------------
 # futuramente a inserção de algum tipo de dados é opcional, como EMAIL
